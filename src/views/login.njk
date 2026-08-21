@@ -1,0 +1,29 @@
+{% extends "layouts/base.njk" %}
+{% from "macros/field-macro.njk" import field %}
+{% block content %}
+    <section class="login-page">
+        <div class="login-card">
+            <p class="login-eyebrow">Secure access</p>
+            <h1>Log in to Kainos Careers</h1>
+            <p class="login-intro">
+                Use your email address and password to continue to your account.
+            </p>
+
+            {% if logoutMessage %}
+                <p class="login-success" role="status">{{ logoutMessage }}</p>
+            {% endif %}
+
+            {% if loginError %}
+                <p class="login-error" role="alert">{{ loginError }}</p>
+            {% endif %}
+
+            <form class="login-form" method="post" action="/auth/login">
+                {{ field('email', 'Email', 'email', 'name@example.com', formData.email or '', errors, 'email') }}
+
+                {{ field('password', 'Password', 'password', '', '', errors, 'current-password') }}
+
+                <button class="login-submit" type="submit">Log in</button>
+            </form>
+        </div>
+    </section>
+{% endblock %}
